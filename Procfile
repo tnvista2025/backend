@@ -1,0 +1,1 @@
+web: gunicorn tnvista_backend.wsgi:application
