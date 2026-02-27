@@ -22,10 +22,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/6.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-xt1)+4kpm!=omtb&se2kv40^yzozka2ru^qr82$e!rp6w!sxnz'
+SECRET_KEY = os.getenv('SECRET_KEY')
+DEBUG = os.getenv('DEBUG', 'False') == 'True'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+
 
 ALLOWED_HOSTS = ['*']
 
@@ -84,9 +85,7 @@ WSGI_APPLICATION = 'tnvista_backend.wsgi.application'
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 
 DATABASES = {
-    'default': dj_database_url.parse(
-        'postgresql://tnvista_ivp1_user:PLtJ8sUZrEtLS15NiFsefASTe4rBcmdt@dpg-d6f44uhdrdic739n5tug-a.singapore-postgres.render.com/tnvista_ivp1'
-    )
+    'default': dj_database_url.config(default=os.getenv('DATABASE_URL'))
 }
 
 
